@@ -28,18 +28,6 @@ function App() {
     localStorage.setItem("todos", JSON.stringify(updatedTodos));
   }
 
-  // const handleAdd = () => {
-  //   if(add === "Update"){
-  //     setAdd("Add")
-  //   }
-
-  //   if(todo.trim().length > 0) {
-  //   setTodos([...todos, {id:uuidv4(),todo, isCompleted: false }]);
-  //   setTodo("")
-  //   saveToLS();
-  //   }
-  // };
-
   const handleAdd = () => {
     if(add === "Update"){
       setAdd("Add")
@@ -67,19 +55,26 @@ function App() {
   };
 
   const handleDelete = (id) => {
-    todos.forEach((todo)=>{
-      if(todo.id === id){
-        todos.splice(todos.indexOf(todo), 1);
-        setTodos([...todos]);
-        saveToLS([...todos]);
-      }
-    })
-    saveToLS();
+    let option = confirm(`Are you sure you want to delete this todo?`)
+    if(option){
+      todos.forEach((todo)=>{
+        if(todo.id === id){
+          todos.splice(todos.indexOf(todo), 1);
+          setTodos([...todos]);
+          saveToLS([...todos]);
+        }
+      })
+      saveToLS();
+    }
+    
   };
 
   const handleDeleteAll = () => {
-    setTodos([]); 
-    saveToLS([]);
+    let option = confirm(`Are you sure you want to delete all todos?`)
+    if(option){
+      setTodos([]); 
+      saveToLS([]);
+    }
   };
 
   const handleChange = (e) => {
